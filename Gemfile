@@ -2,8 +2,13 @@ ruby '2.7.2'
 
 source 'https://rubygems.org'
 
+gem 'addressable', '~> 2.7'
+gem 'http', '~> 4.4'
+gem 'micromicro', '~> 1.0'
 gem 'rack', '~> 2.2'
 gem 'sinatra', '~> 2.0'
+gem 'sinatra-contrib', '~> 2.0'
+gem 'sinatra-param', github: 'jgarber623/sinatra-param', tag: 'v3.4.0'
 
 group :development, :test do
   gem 'bundler-audit', '~> 0.7.0.1'
