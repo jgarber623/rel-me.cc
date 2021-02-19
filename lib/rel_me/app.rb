@@ -2,15 +2,25 @@ module RelMe
   class App < Sinatra::Base
     HTTP_HEADERS_OPTS = {
       accept: '*/*',
-      user_agent: 'rel="me" (https://rel-me.cc)'
+      user_agent: 'rel=“me” Link Discovery (https://rel-me.cc)'
     }.freeze
 
     configure do
+      use Rack::Protection, except: [:remote_token, :session_hijacking, :xss_header]
+      use Rack::Protection::ContentSecurityPolicy, default_src: "'self'", style_src: "'self' https://fonts.googleapis.com", font_src: "'self' https://fonts.gstatic.com", frame_ancestors: "'none'"
+      use Rack::Protection::StrictTransport, max_age: 31_536_000, include_subdomains: true, preload: true
+
       set :root, File.dirname(File.expand_path('..', __dir__))
 
       set :raise_errors, true
       set :raise_sinatra_param_exceptions, true
       set :show_exceptions, :after_handler
+    end
+
+    configure :production do
+      use Rack::SslEnforcer, redirect_html: false
+      use Rack::HostRedirect, %w[www.rel-me.cc] => 'rel-me.cc'
+      use Rack::Deflater
     end
 
     register Sinatra::Param
