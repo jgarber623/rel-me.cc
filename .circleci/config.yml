@@ -1,0 +1,25 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.2
+
+jobs:
+  test:
+    executor:
+      name: ruby/default
+      tag: 2.7.2
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: Run CI script
+          command: bin/ci
+
+workflows:
+  version: 2
+  default:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: production
