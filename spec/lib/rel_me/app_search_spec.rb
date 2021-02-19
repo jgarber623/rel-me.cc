@@ -59,7 +59,7 @@ RSpec.describe RelMe::App do
 
       it 'renders the search view' do
         expect(last_response.status).to eq(200)
-        expect(last_response.body).to include('https://example.com/webmention')
+        expect(last_response.body).to include('https://www.flickr.com/photos/jgarber')
       end
     end
   end
