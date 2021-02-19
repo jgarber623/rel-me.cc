@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+
+  <title>rel=“me”</title>
+
+  <meta name="apple-mobile-web-app-title" content="rel=“me”">
+  <meta name="application-name" content="rel=“me”">
+  <meta name="description" content="Discover a URL’s published rel=“me” links.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@jgarber">
+  <meta property="og:description" content="Discover a URL’s published rel=“me” links.">
+  <meta property="og:title" content="rel=“me”">
+</head>
+<body>
+
+  <header class="app-header h-x-app">
+    <div class="wrapper">
+      <h1>
+        <a href="/" class="p-name u-url" rel="home">
+          rel=“me”
+        </a>
+      </h1>
+
+      <p class="p-summary">Discover a URL’s published <a href="https://indieweb.org/rel-me">rel=“me”</a> links.</p>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div class="wrapper">
+      <%= yield %>
+    </div>
+  </main>
+
+</body>
+</html>
