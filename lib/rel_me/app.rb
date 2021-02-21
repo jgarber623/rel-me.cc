@@ -19,7 +19,7 @@ module RelMe
 
     configure :production do
       use Rack::SslEnforcer, redirect_html: false
-      use Rack::HostRedirect, %w[www.rel-me.cc] => 'rel-me.cc'
+      use Rack::HostRedirect, %w[rel-me-cc-web-j6yqsxijmq-uc.a.run.app www.rel-me.cc] => 'rel-me.cc'
       use Rack::Deflater
     end
 
