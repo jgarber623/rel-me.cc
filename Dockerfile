@@ -26,7 +26,7 @@ RUN bundle install \
 
 COPY . .
 
-# RUN bundle exec rake assets:precompile
+RUN bundle exec rake assets:precompile
 
 ##################################################
 # Final Stage
