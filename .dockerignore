@@ -13,6 +13,5 @@
 /bin/
 /coverage/
 /spec/
-cloudbuild.yaml
 Dockerfile
 LICENSE
