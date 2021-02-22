@@ -3,11 +3,17 @@
 <% if rel_me_urls.any? %>
   <p>Found the following rel=“me” links for <a href="<%= canonical_url %>"><%= canonical_url %></a>:</p>
 
-  <ul class="search-results-list">
-    <% rel_me_urls.each do |rel_me_url| %>
-      <li><%= rel_me_url %></li>
-    <% end %>
-  </ul>
+  <figure class="search-results-list">
+    <ul>
+      <% rel_me_urls.each do |rel_me_url| %>
+        <li><%= rel_me_url %></li>
+      <% end %>
+    </ul>
+
+    <figcaption>
+      rel=“me” links for <a href="<%= canonical_url %>"><%= canonical_url %></a> represented as a list.
+    </figcaption>
+  </figure>
 
   <h2><abbr title="JavaScript Object Notation">JSON</abbr> Data</h2>
 
