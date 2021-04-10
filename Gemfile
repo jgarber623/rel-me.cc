@@ -22,11 +22,11 @@ group :development, :test do
   gem 'rake'
   gem 'reek', require: false
   gem 'rspec'
-  gem 'rubocop', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rake', require: false
-  gem 'rubocop-rspec', require: false
-  gem 'webmock', require: false
+  gem 'rubocop', '>= 1.12.1', require: false
+  gem 'rubocop-performance', '>= 1.10.2', require: false
+  gem 'rubocop-rake', '>= 0.5.1', require: false
+  gem 'rubocop-rspec', '>= 2.2.0', require: false
+  gem 'webmock', '>= 3.12.2', require: false
 end
 
 group :development do
