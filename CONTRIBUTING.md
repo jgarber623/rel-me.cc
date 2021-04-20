@@ -11,9 +11,9 @@ I definitely appreciate your interest in (and help improving) rel-me.cc. Thanks!
 
 ## Installation
 
-rel-me.cc is written in [Ruby](https://www.ruby-lang.org) (version 2.7.2) and uses the [Bundler](https://bundler.io) gem to manage Ruby dependencies. Install Ruby 2.7.2 using a method of your choice (e.g. [rbenv](https://github.com/rbenv/rbenv), [chruby](https://github.com/postmodern/chruby), or [RVM](https://rvm.io)).
+rel-me.cc is written in [Ruby](https://www.ruby-lang.org) (version 2.7.3) and uses the [Bundler](https://bundler.io) gem to manage Ruby dependencies. Install Ruby 2.7.3 using a method of your choice (e.g. [rbenv](https://github.com/rbenv/rbenv), [chruby](https://github.com/postmodern/chruby), or [RVM](https://rvm.io)).
 
-Once you've installed Ruby 2.7.2, install Bundler and the project's dependencies by running:
+Once you've installed Ruby 2.7.3, install Bundler and the project's dependencies by running:
 
 ```sh
 gem install bundler
