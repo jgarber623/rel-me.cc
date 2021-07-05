@@ -2,7 +2,7 @@ ruby '2.7.3'
 
 source 'https://rubygems.org'
 
-gem 'addressable', '~> 2.7'
+gem 'addressable', '~> 2.8'
 gem 'breakpoint', '~> 2.7'
 gem 'http', '~> 4.4'
 gem 'micromicro', '~> 1.1'
