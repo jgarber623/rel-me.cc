@@ -2,10 +2,10 @@ ruby '2.7.3'
 
 source 'https://rubygems.org'
 
-gem 'addressable', '~> 2.7'
+gem 'addressable', '~> 2.8', '>= 2.8.0'
 gem 'breakpoint', '~> 2.7'
-gem 'http', '~> 4.4'
-gem 'micromicro', '~> 1.1'
+gem 'http', '~> 4.4', '>= 4.4.1'
+gem 'micromicro', '~> 1.1', '>= 1.1.0'
 gem 'rack', '~> 2.2'
 gem 'rack-host-redirect', '~> 1.3'
 gem 'rack-ssl-enforcer', '~> 0.2.9'
@@ -27,7 +27,7 @@ group :development, :test do
   gem 'rubocop-performance', require: false
   gem 'rubocop-rake', require: false
   gem 'rubocop-rspec', require: false
-  gem 'webmock', require: false
+  gem 'webmock', '>= 3.13.0', require: false
 end
 
 group :development do
