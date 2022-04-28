@@ -2,8 +2,8 @@
 
 I'd love to have your help improving rel-me.cc! If you'd like to pitch in, you can do so in a number of ways:
 
-1. Look through open [Issues](https://github.com/jgarber623/indieweb-endpoints.cc/issues).
-1. Review any open [Pull Requests](https://github.com/jgarber623/indieweb-endpoints.cc/pulls).
+1. Look through open [Issues](https://github.com/jgarber623/rel-me.cc/issues).
+1. Review any open [Pull Requests](https://github.com/jgarber623/rel-me.cc/pulls).
 1. [Fork rel-me.cc](#get-set-up-to-contribute) and fix an open Issue or add your own feature.
 1. File new Issues if you have a good idea or see a bug and don't know how to fix it yourself. _Only do this after you've made sure the behavior or problem you're seeing isn't already documented in an open Issue._
 
