@@ -5,7 +5,12 @@ source 'https://rubygems.org'
 ruby '3.1.2'
 
 gem 'puma'
-gem 'roda'
+gem 'rack'
+gem 'rake'
+gem 'roda', github: 'jeremyevans/roda', ref: 'df6dff1'
+gem 'roda-sprockets'
+gem 'sassc'
+gem 'tilt'
 
 group :development do
   gem 'pry-byebug'
