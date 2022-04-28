@@ -39,6 +39,7 @@ class RelMe < Roda
 
   route do |r|
     r.public
+    r.sprockets unless opts[:environment] == 'production'
   end
 
   status_handler(404) do |r|
