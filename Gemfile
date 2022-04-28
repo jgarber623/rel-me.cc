@@ -5,6 +5,11 @@ source 'https://rubygems.org'
 ruby '3.1.2'
 
 group :test do
+  gem 'bundler-audit', require: false
+  gem 'code-scanning-rubocop', require: false
+  gem 'rspec'
+  gem 'rspec-github', require: false
+  gem 'rspec-its'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rake', require: false
