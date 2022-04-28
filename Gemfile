@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 
 ruby '3.1.2'
 
+gem 'http'
+gem 'micromicro'
 gem 'puma'
 gem 'rack'
 gem 'rake'

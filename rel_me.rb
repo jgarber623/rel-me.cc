@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class RelMe < Roda
+  class InvalidURIError < StandardError; end
+
+  HTTP_HEADERS_OPTS = {
+    accept: '*/*',
+    user_agent: 'rel=“me” Link Discovery (https://rel-me.cc)'
+  }.freeze
+
   # Routing plugins
   plugin :head
   plugin :not_allowed
@@ -46,6 +53,33 @@ class RelMe < Roda
 
       view :index
     end
+
+    r.get 'search' do
+      uri = HTTP::URI.parse(r.params['url'].to_s)
+
+      raise InvalidURIError unless uri.http? || uri.https?
+
+      rsp = HTTP.follow(max_hops: 20).headers(HTTP_HEADERS_OPTS).timeout(connect: 5, read: 5).get(uri)
+
+      canonical_url = rsp.uri.to_s
+      rel_me_urls = MicroMicro.parse(rsp.body.to_s, canonical_url).relationships.group_by_rel[:me] || []
+
+      r.json { rel_me_urls.to_json }
+
+      view :search, locals: { canonical_url: canonical_url, rel_me_urls: rel_me_urls }
+    rescue InvalidURIError, Addressable::URI::InvalidURIError
+      r.halt 400
+    rescue HTTP::Error, OpenSSL::SSL::SSLError
+      r.halt 408
+    end
+  end
+
+  status_handler(400) do |r|
+    error = { message: 'Parameter url is required and must be a valid URL (e.g. https://example.com)' }
+
+    r.json { error.to_json }
+
+    view :bad_request, locals: error
   end
 
   status_handler(404) do |r|
@@ -64,5 +98,13 @@ class RelMe < Roda
     r.json { error.to_json }
 
     error[:message]
+  end
+
+  status_handler(408) do |r|
+    error = { message: 'The request timed out and could not be completed' }
+
+    r.json { error.to_json }
+
+    view :request_timeout, locals: error
   end
 end
