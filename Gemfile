@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 
 ruby '3.1.2'
 
+gem 'puma'
+gem 'roda'
+
 group :development do
   gem 'pry-byebug'
   gem 'rerun'
