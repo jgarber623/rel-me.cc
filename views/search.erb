@@ -1,0 +1,42 @@
+<h1>Search Results</h1>
+
+<% if rel_me_urls.any? %>
+  <p>Found the following rel=“me” links for <a href="<%= canonical_url %>"><%= canonical_url %></a>:</p>
+
+  <figure class="search-results-list">
+    <ul>
+      <% rel_me_urls.each do |rel_me_url| %>
+        <li><%= rel_me_url %></li>
+      <% end %>
+    </ul>
+
+    <figcaption>
+      rel=“me” links for <a href="<%= canonical_url %>"><%= canonical_url %></a> represented as a list.
+    </figcaption>
+  </figure>
+
+  <h2><abbr title="JavaScript Object Notation">JSON</abbr> Data</h2>
+
+  <figure class="search-results-data">
+    <output>
+      <pre><%= JSON.pretty_generate(rel_me_urls) %></pre>
+    </output>
+
+    <figcaption>
+      rel=“me” links for <a href="<%= canonical_url %>"><%= canonical_url %></a> represented as JSON.
+    </figcaption>
+  </figure>
+<% else %>
+  <p>No rel=“me” links were found for <a href="<%= canonical_url %>"><%= canonical_url %></a>.</p>
+<% end %>
+
+<h2>Command Line Interface</h2>
+
+<figure class="search-results-cli">
+  <figcaption>
+    Use command line utilities like <a href="https://curl.haxx.se">curl</a> or <a href="https://www.gnu.org/software/wget/">Wget</a> to directly query rel-me.cc.
+  </figcaption>
+
+  <kbd>curl --header 'Accept: application/json' --silent 'https://rel-me.cc/search?url=<%= canonical_url %>'</kbd>
+  <kbd>wget --header 'Accept: application/json' --quiet -O - 'https://rel-me.cc/search?url=<%= canonical_url %>'</kbd>
+</figure>

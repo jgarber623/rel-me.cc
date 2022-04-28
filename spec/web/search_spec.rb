@@ -49,5 +49,52 @@ RSpec.describe RelMe, roda: :app do
         its(:body) { is_expected.to eq({ message: message }.to_json) }
       end
     end
+
+    context 'when valid url param' do
+      before do
+        stub_request(:get, example_url).to_return(
+          headers: { 'Content-Type': 'text/html' },
+          body: <<~HTML
+            <html>
+            <body>
+              <a rel="me" href="https://www.flickr.com/photos/jgarber">Flickr</a>
+              <a rel="me" href="https://github.com/jgarber623">GitHub</a>
+              <a rel="me" href="https://indieweb.org/User:Sixtwothree.org">IndieWeb</a>
+              <a rel="me" href="https://twitter.com/jgarber">Twitter</a>
+            </body>
+            </html>
+          HTML
+        )
+      end
+
+      context 'when requesting text/html' do
+        before do
+          header 'Accept', 'text/html'
+          get '/search', url: example_url
+        end
+
+        it { is_expected.to be_ok }
+        its(:body) { is_expected.to include('https://www.flickr.com/photos/jgarber') }
+      end
+
+      context 'when requesting application/json' do
+        let(:rel_me_urls) do
+          [
+            'https://www.flickr.com/photos/jgarber',
+            'https://github.com/jgarber623',
+            'https://indieweb.org/User:Sixtwothree.org',
+            'https://twitter.com/jgarber'
+          ]
+        end
+
+        before do
+          header 'Accept', 'application/json'
+          get '/search', url: example_url
+        end
+
+        it { is_expected.to be_ok }
+        its(:body) { is_expected.to eq(rel_me_urls.to_json) }
+      end
+    end
   end
 end
