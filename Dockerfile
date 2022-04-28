@@ -1,43 +1,35 @@
-FROM ruby:2.7.4-alpine as ruby-stage
+################################################################################
+# Base Stage
+################################################################################
+FROM ruby:3.1.2-alpine3.15 AS base-stage
 
-##################################################
-# Build Stage
-##################################################
-FROM ruby-stage as build-stage
+ARG BUNDLER_VERSION="2.3.11"
 
-ENV RACK_ENV production
+ENV BUNDLE_JOBS=10 \
+    BUNDLE_RETRIES=5
 
-RUN apk add --no-cache \
-        g++ \
-        git \
-        make \
-    && bundle config --global frozen true \
-    && bundle config --global without "development test"
+EXPOSE 8080
+
+# Alpine Linux does not have a glibc-compatible library installed which can
+# cause problems with running gems like Nokogiri.
+#
+# See: https://github.com/sparklemotion/nokogiri/issues/2430
+RUN apk add --no-cache --update gcompat
+
+RUN echo "gem: --no-document" >> ~/.gemrc && \
+    gem install bundler --version "${BUNDLER_VERSION}"
 
 WORKDIR /usr/src/app
 
 COPY Gemfile Gemfile.lock ./
 
-RUN bundle install \
-    && bundle clean --force \
-    && rm -rf /usr/local/bundle/cache/*.gem \
-    && find /usr/local/bundle/gems/ -name "*.c" -delete \
-    && find /usr/local/bundle/gems/ -name "*.o" -delete
+################################################################################
+# Development
+################################################################################
+FROM base-stage AS development
 
-COPY . .
+ENV RACK_ENV=development
 
-RUN bundle exec rake assets:precompile
+RUN apk add --no-cache --update g++ git make
 
-##################################################
-# Final Stage
-##################################################
-FROM ruby-stage
-
-ENV RACK_ENV production
-
-COPY --from=build-stage /usr/local/bundle /usr/local/bundle
-COPY --from=build-stage /usr/src/app /usr/src/app
-
-WORKDIR /usr/src/app
-
-CMD ["bundle", "exec", "rackup", "--port", "8080"]
+RUN bundle install
