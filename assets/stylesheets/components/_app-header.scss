@@ -23,11 +23,11 @@
       top: 0.175rem;
       width: 2rem;
 
-      @include breakpoint(32rem) {
+      @media (min-width: 32rem) {
         display: inline-block;
       }
 
-      @include breakpoint(56rem) {
+      @media (min-width: 56rem) {
         display: block;
         left: calc(-2rem - var(--spacing-small));
         padding-right: var(--spacing-small);
