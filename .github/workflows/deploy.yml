@@ -3,8 +3,8 @@ name: Deploy
 on:
   push:
     branches: [production]
-  workflow_dispatch:
-    branches: [production]
+  # workflow_dispatch:
+  #   branches: [production]
 
 concurrency: production
 
