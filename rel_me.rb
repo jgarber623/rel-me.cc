@@ -40,15 +40,29 @@ class RelMe < Roda
   route do |r|
     r.public
     r.sprockets unless opts[:environment] == 'production'
+
+    r.root do
+      response.cache_control public: true
+
+      view :index
+    end
   end
 
   status_handler(404) do |r|
-  response.cache_control public: true
+    response.cache_control public: true
 
-  error = { message: 'The requested URL could not be found' }
+    error = { message: 'The requested URL could not be found' }
 
-  r.json { error.to_json }
+    r.json { error.to_json }
 
-  view :not_found, locals: error
-end
+    view :not_found, locals: error
+  end
+
+  status_handler(405, keep_headers: ['Allow']) do |r|
+    error = { message: 'The requested method is not allowed' }
+
+    r.json { error.to_json }
+
+    error[:message]
+  end
 end
