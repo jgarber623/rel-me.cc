@@ -17,6 +17,7 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     method_source (1.0.0)
+    nio4r (2.5.8)
     parallel (1.22.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
@@ -26,6 +27,8 @@ GEM
     pry-byebug (3.9.0)
       byebug (~> 11.0)
       pry (~> 0.13.0)
+    puma (5.6.4)
+      nio4r (~> 2.0)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -37,6 +40,8 @@ GEM
     rerun (0.13.1)
       listen (~> 3.0)
     rexml (3.2.5)
+    roda (3.55.0)
+      rack
     rspec (3.11.0)
       rspec-core (~> 3.11.0)
       rspec-expectations (~> 3.11.0)
@@ -96,8 +101,10 @@ DEPENDENCIES
   bundler-audit
   code-scanning-rubocop
   pry-byebug
+  puma
   rack-test
   rerun
+  roda
   rspec
   rspec-github
   rspec-its
