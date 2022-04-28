@@ -44,6 +44,14 @@ class RelMe < Roda
     use Rack::CommonLogger
   end
 
+  # :nocov:
+  configure :production do
+    use Rack::Deflater
+    use Rack::HostRedirect, [ENV.fetch('HOSTNAME', nil), 'www.rel-me.cc'].compact => 'rel-me.cc'
+    use Rack::Static, urls: ['/assets'], root: 'public'
+  end
+  # :nocov:
+
   route do |r|
     r.public
     r.sprockets unless opts[:environment] == 'production'
