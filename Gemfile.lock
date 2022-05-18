@@ -1,15 +1,7 @@
-GIT
-  remote: https://github.com/jeremyevans/roda.git
-  revision: df6dff1b205d84b88dccb2fc802a7f7298025769
-  ref: df6dff1
-  specs:
-    roda (3.55.0)
-      rack
-
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.5.1)
+    activesupport (6.1.6)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -62,7 +54,7 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.15.0)
     nio4r (2.5.8)
-    nokogiri (1.13.4)
+    nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     parallel (1.22.1)
@@ -92,6 +84,8 @@ GEM
     rerun (0.13.1)
       listen (~> 3.0)
     rexml (3.2.5)
+    roda (3.56.0)
+      rack
     roda-sprockets (2.0.0)
       roda (~> 3)
       sprockets (>= 2.2)
@@ -181,7 +175,7 @@ DEPENDENCIES
   rack-test
   rake
   rerun
-  roda!
+  roda
   roda-sprockets
   rspec
   rspec-github
