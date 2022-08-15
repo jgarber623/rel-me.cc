@@ -6,7 +6,7 @@
   <figure class="search-results-list">
     <ul>
       <% rel_me_urls.each do |rel_me_url| %>
-        <li><%= rel_me_url %></li>
+        <li><%= h(rel_me_url) %></li>
       <% end %>
     </ul>
 
@@ -19,7 +19,7 @@
 
   <figure class="search-results-data">
     <output>
-      <pre><%= JSON.pretty_generate(rel_me_urls) %></pre>
+      <pre><%= h(JSON.pretty_generate(rel_me_urls)) %></pre>
     </output>
 
     <figcaption>
