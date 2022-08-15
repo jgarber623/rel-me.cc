@@ -55,7 +55,7 @@ If diving into Ruby isn't your thing, but you'd still like to support rel-me.cc,
 
 ## Acknowledgments
 
-rel-me.cc wouldn't exist without the hard work put in by everyone involved in the [IndieWeb](https://indieweb.org) and[microformats](https://microformats.org) communities.
+rel-me.cc wouldn't exist without the hard work put in by everyone involved in the [IndieWeb](https://indieweb.org) and [microformats](https://microformats.org) communities.
 
 Text is set using [Alfa Slab One](https://fonts.google.com/specimen/Alfa+Slab+One) and [Gentium Book Basic](https://fonts.google.com/specimen/Gentium+Book+Basic) which are provided by [Google Fonts](https://fonts.google.com). Iconography is from [Font Awesome](https://fontawesome.com)'s icon set.
 
