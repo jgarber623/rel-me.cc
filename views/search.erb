@@ -1,7 +1,7 @@
 <h1>Search Results</h1>
 
 <% if rel_me_urls.any? %>
-  <p>Found the following rel=“me” links for <a href="<%= canonical_url %>"><%= canonical_url %></a>:</p>
+  <p>Found the following rel=“me” links for <%= link_to canonical_url, canonical_url %>:</p>
 
   <figure class="search-results-list">
     <ul>
@@ -11,7 +11,7 @@
     </ul>
 
     <figcaption>
-      rel=“me” links for <a href="<%= canonical_url %>"><%= canonical_url %></a> represented as a list.
+      rel=“me” links for <%= link_to canonical_url, canonical_url %> represented as a list.
     </figcaption>
   </figure>
 
@@ -23,11 +23,11 @@
     </output>
 
     <figcaption>
-      rel=“me” links for <a href="<%= canonical_url %>"><%= canonical_url %></a> represented as JSON.
+      rel=“me” links for <%= link_to canonical_url, canonical_url %> represented as JSON.
     </figcaption>
   </figure>
 <% else %>
-  <p>No rel=“me” links were found for <a href="<%= canonical_url %>"><%= canonical_url %></a>.</p>
+  <p>No rel=“me” links were found for <%= link_to canonical_url, canonical_url %>.</p>
 <% end %>
 
 <h2>Command Line Interface</h2>
