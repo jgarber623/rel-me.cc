@@ -1,6 +1,6 @@
 services:
   web:
-    image: rel-me-cc-web
+    image: jgarber623/rel-me-cc-web
     build:
       context: .
       target: development
