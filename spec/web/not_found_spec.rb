@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RelMe, roda: :app do
+RSpec.describe RelMeApp, roda: :app do
   describe 'GET /foo' do
     let(:message) { 'The requested URL could not be found' }
 

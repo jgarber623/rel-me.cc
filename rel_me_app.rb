@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RelMe < Roda
+class RelMeApp < Roda
   class InvalidURIError < StandardError; end
 
   HTTP_HEADERS_OPTS = {

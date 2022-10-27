@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RelMe, roda: :app do
+RSpec.describe RelMeApp, roda: :app do
   describe 'HEAD /' do
     before { head '/' }
 
