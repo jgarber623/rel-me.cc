@@ -86,12 +86,22 @@ class RelMeApp < Roda
 
       rsp = HTTP.follow(max_hops: 20).headers(HTTP_HEADERS_OPTS).timeout(connect: 5, read: 5).get(uri)
 
-      canonical_url = rsp.uri.to_s
-      rel_me_urls = MicroMicro.parse(rsp.body.to_s, canonical_url).relationships.group_by_rel[:me] || []
+      urls_from_headers = LinkHeaderParser
+                            .parse(rsp.headers.get('link'), base: rsp.uri)
+                            .group_by_relation_type
+                            .fetch(:me, [])
+                            .map(&:target_uri)
+
+      urls_from_body = Nokogiri::HTML(rsp.body.to_s, rsp.uri)
+                         .resolve_relative_urls!
+                         .css('[href][rel~="me"]')
+                         .map { |node| node['href'] }
+
+      rel_me_urls = (urls_from_headers + urls_from_body).compact
 
       r.json { rel_me_urls.to_json }
 
-      view :search, locals: { canonical_url: canonical_url, rel_me_urls: rel_me_urls }
+      view :search, locals: { canonical_url: rsp.uri.to_s, rel_me_urls: rel_me_urls }
     rescue InvalidURIError, Addressable::URI::InvalidURIError
       r.halt 400
     rescue HTTP::Error, OpenSSL::SSL::SSLError

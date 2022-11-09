@@ -1,11 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.4)
-      concurrent-ruby (~> 1.0, >= 1.0.2)
-      i18n (>= 1.6, < 2)
-      minitest (>= 5.1)
-      tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     ansi (1.5.0)
@@ -36,24 +31,18 @@ GEM
     http-cookie (1.0.5)
       domain_name (~> 0.5)
     http-form_data (2.3.0)
-    i18n (1.12.0)
-      concurrent-ruby (~> 1.0)
     io-console (0.5.11)
     irb (1.4.2)
       reline (>= 0.3.0)
     json (2.6.2)
+    link-header-parser (4.0.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
-    micromicro (3.1.0)
-      activesupport (~> 7.0)
-      nokogiri (>= 1.13)
-      nokogiri-html-ext (~> 0.2.2)
     mini_portile2 (2.8.0)
-    minitest (5.16.3)
     nio4r (2.5.8)
     nokogiri (1.13.9)
       mini_portile2 (~> 2.8.0)
@@ -146,8 +135,6 @@ GEM
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.2.1)
     tilt (2.0.11)
-    tzinfo (2.0.5)
-      concurrent-ruby (~> 1.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
@@ -164,7 +151,9 @@ DEPENDENCIES
   bundler-audit
   debug
   http
-  micromicro
+  link-header-parser
+  nokogiri
+  nokogiri-html-ext
   puma
   rack
   rack-host-redirect
