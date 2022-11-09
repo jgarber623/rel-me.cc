@@ -1,6 +1,16 @@
 inherit_from:
   - https://raw.githubusercontent.com/jgarber623/rubocop-configs/main/.rubocop.roda.yml
 
+# Checks the indentation of the method name part in method calls that span more
+# than one line.
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+# Checks if the length of a block exceeds some maximum value.
+Metrics/BlockLength:
+  AllowedMethods:
+    - route
+
 # Checks that spec file paths are consistent and well-formed.
 RSpec/FilePath:
   SpecSuffixOnly: true
