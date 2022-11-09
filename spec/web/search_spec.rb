@@ -53,14 +53,18 @@ RSpec.describe RelMeApp, roda: :app do
     context 'when valid url param' do
       before do
         stub_request(:get, example_url).to_return(
-          headers: { 'Content-Type': 'text/html' },
+          headers: {
+            content_type: 'text/html',
+            link: [
+              '<https://www.flickr.com/photos/jgarber>; rel="me"',
+              '<https://github.com/jgarber623>; rel="me authn"'
+            ]
+          },
           body: <<~HTML
             <html>
             <body>
-              <a rel="me" href="https://www.flickr.com/photos/jgarber">Flickr</a>
-              <a rel="me" href="https://github.com/jgarber623">GitHub</a>
-              <a rel="me" href="https://indieweb.org/User:Sixtwothree.org">IndieWeb</a>
               <a rel="me" href="https://twitter.com/jgarber">Twitter</a>
+              <a rel="me" href="https://indieweb.org/User:Sixtwothree.org">IndieWeb</a>
             </body>
             </html>
           HTML
@@ -78,12 +82,15 @@ RSpec.describe RelMeApp, roda: :app do
       end
 
       context 'when requesting application/json' do
+        # NOTE: WebMock (or some other tool in the test suite) is alphabetically
+        # sorting the Link headers defined above. So, github.com before
+        # www.flickr.com, but ONLY here in this test.
         let(:rel_me_urls) do
           [
-            'https://www.flickr.com/photos/jgarber',
             'https://github.com/jgarber623',
-            'https://indieweb.org/User:Sixtwothree.org',
-            'https://twitter.com/jgarber'
+            'https://www.flickr.com/photos/jgarber',
+            'https://twitter.com/jgarber',
+            'https://indieweb.org/User:Sixtwothree.org'
           ]
         end
 
