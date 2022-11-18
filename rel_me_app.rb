@@ -97,7 +97,7 @@ class RelMeApp < Roda
                          .css('[href][rel~="me"]')
                          .map { |node| node['href'] }
 
-      rel_me_urls = (urls_from_headers + urls_from_body).compact
+      rel_me_urls = (urls_from_headers + urls_from_body).uniq.compact
 
       r.json { rel_me_urls.to_json }
 
