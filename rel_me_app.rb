@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'models/rel_me_urls_parser'
+
 class RelMeApp < Roda
   class InvalidURIError < StandardError; end
 
@@ -86,18 +88,7 @@ class RelMeApp < Roda
 
       rsp = HTTP.follow(max_hops: 20).headers(HTTP_HEADERS_OPTS).timeout(connect: 5, read: 5).get(uri)
 
-      urls_from_headers = LinkHeaderParser
-                            .parse(rsp.headers.get('link'), base: rsp.uri)
-                            .group_by_relation_type
-                            .fetch(:me, [])
-                            .map(&:target_uri)
-
-      urls_from_body = Nokogiri::HTML(rsp.body.to_s, rsp.uri)
-                         .resolve_relative_urls!
-                         .css('[href][rel~="me"]')
-                         .map { |node| node['href'] }
-
-      rel_me_urls = (urls_from_headers + urls_from_body).uniq.compact
+      rel_me_urls = RelMeUrlsParser.new(rsp).results
 
       r.json { rel_me_urls.to_json }
 
