@@ -3,8 +3,7 @@
 **Discover a URL's published rel=“me” links.**
 
 [![Build](https://img.shields.io/github/actions/workflow/status/jgarber623/rel-me.cc/ci.yml?branch=main&logo=github&style=for-the-badge)](https://github.com/jgarber623/rel-me.cc/actions/workflows/ci.yml)
-[![Maintainability](https://img.shields.io/codeclimate/maintainability/jgarber623/rel-me.cc.svg?logo=code-climate&style=for-the-badge)](https://codeclimate.com/github/jgarber623/rel-me.cc)
-[![Coverage](https://img.shields.io/codeclimate/c/jgarber623/rel-me.cc.svg?logo=code-climate&style=for-the-badge)](https://codeclimate.com/github/jgarber623/rel-me.cc/code)
+[![Deployment](https://img.shields.io/github/deployments/jgarber623/rel-me.cc/production?label=Deployment&logo=github&style=for-the-badge)](https://github.com/jgarber623/rel-me.cc/deployments/activity_log?environment=production)
 
 ## Usage
 
