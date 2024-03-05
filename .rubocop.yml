@@ -5,3 +5,15 @@ inherit_from:
 AllCops:
   Exclude:
     - bin/bundle
+
+# Checks that spec file paths are consistent and well-formed.
+RSpec/FilePath:
+  SpecSuffixOnly: true
+
+# Checks that spec file paths are consistent and well-formed.
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+# Checks for nested example groups.
+RSpec/NestedGroups:
+  Max: 4
