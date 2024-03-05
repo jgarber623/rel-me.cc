@@ -16,6 +16,6 @@ RSpec.configure do |config|
   config.disable_monkey_patching!
 
   def app
-    RelMeApp.freeze.app
+    App.freeze.app
   end
 end

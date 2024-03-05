@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RelMeApp, roda: :app do
+RSpec.describe App, roda: :app do
   describe 'GET /search' do
     let(:example_url) { 'https://example.com' }
 

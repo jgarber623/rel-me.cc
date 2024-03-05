@@ -2,4 +2,4 @@
 
 require_relative 'config/environment'
 
-run RelMeApp.freeze.app
+run App.freeze.app

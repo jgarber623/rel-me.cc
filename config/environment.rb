@@ -4,4 +4,4 @@ require 'bundler/setup'
 
 Bundler.require(:default, ENV.fetch('RACK_ENV', 'development').to_sym)
 
-require_relative '../rel_me_app'
+require_relative '../app'

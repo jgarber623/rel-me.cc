@@ -2,7 +2,7 @@
 
 require_relative 'models/rel_me_urls_parser'
 
-class RelMeApp < Roda
+class App < Roda
   class InvalidURIError < StandardError; end
 
   HTTP_HEADERS_OPTS = {
