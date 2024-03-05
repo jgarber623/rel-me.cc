@@ -40,17 +40,6 @@ The above command will return a [JSON](https://json.org) array with the results 
 ]
 ```
 
-## Improving rel-me.cc
-
-You want to help make rel-me.cc better? Hell yeah! I like your enthusiasm. For more on how you can help, check out [CONTRIBUTING.md](https://github.com/jgarber623/rel-me.cc/blob/master/CONTRIBUTING.md).
-
-### Donations
-
-If diving into Ruby isn't your thing, but you'd still like to support rel-me.cc, consider making a donation! Any amount—large or small—is greatly appreciated. As a token of my gratitude, I'll add your name to the [Acknowledgments](#acknowledgments) below.
-
-[![Donate via Square Cash](https://img.shields.io/badge/square%20cash-$jgarber-28c101.svg?style=for-the-badge)](https://cash.me/$jgarber)
-[![Donate via Paypal](https://img.shields.io/badge/paypal-jgarber-009cde.svg?style=for-the-badge)](https://www.paypal.me/jgarber)
-
 ## Acknowledgments
 
 rel-me.cc wouldn't exist without the hard work put in by everyone involved in the [IndieWeb](https://indieweb.org) and [microformats](https://microformats.org) communities.
