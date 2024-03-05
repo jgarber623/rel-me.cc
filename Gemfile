@@ -1,37 +1,36 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+ruby file: ".ruby-version"
 
-ruby '3.2.2'
+source "https://rubygems.org"
 
-gem 'http'
-gem 'link-header-parser'
-gem 'nokogiri'
-gem 'nokogiri-html-ext', require: 'nokogiri/html-ext'
-gem 'puma'
-gem 'rack'
-gem 'rack-host-redirect'
-gem 'rake'
-gem 'roda'
-gem 'roda-sprockets'
-gem 'sassc'
-gem 'tilt'
+gem "http"
+gem "link-header-parser"
+gem "nokogiri"
+gem "nokogiri-html-ext", require: "nokogiri/html-ext"
+gem "puma"
+gem "rack"
+gem "rack-host-redirect"
+gem "rake"
+gem "roda"
+gem "roda-sprockets"
+gem "sassc"
+gem "tilt"
 
 group :development do
-  gem 'debug'
-  gem 'rerun'
+  gem "debug"
+  gem "rubocop", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rake", require: false
+  gem "rubocop-rspec", require: false
 end
 
 group :test do
-  gem 'bundler-audit', require: false
-  gem 'rack-test'
-  gem 'rspec'
-  gem 'rspec-its'
-  gem 'rubocop', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rake', require: false
-  gem 'rubocop-rspec', require: false
-  gem 'simplecov', require: false
-  gem 'simplecov-console', require: false
-  gem 'webmock', require: false
+  gem "bundler-audit", require: false
+  gem "rack-test"
+  gem "rspec"
+  gem "rspec-its"
+  gem "simplecov", require: false
+  gem "simplecov-console", require: false
+  gem "webmock", require: false
 end
