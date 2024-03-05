@@ -1,72 +1,35 @@
-################################################################################
-# Base Stage
-################################################################################
-FROM ruby:3.2.2-alpine3.17 AS base-stage
-
-# Silence Ruby deprecation warnings and enable YJIT.
-ENV RUBYOPT="-W:no-deprecated --yjit"
+FROM ruby:3.3.0-slim-bookworm
 
 EXPOSE 8080
 
-# Alpine Linux does not have a glibc-compatible library installed which can
-# cause problems with running gems like Nokogiri.
-#
-# See: https://github.com/sparklemotion/nokogiri/issues/2430
-RUN apk add --no-cache --update gcompat
-
-RUN echo "gem: --no-document" >> ~/.gemrc
-
-WORKDIR /usr/src/app
-
-################################################################################
-# Development
-################################################################################
-FROM base-stage AS development
-
-ENV RACK_ENV=development \
-    BUNDLE_PATH=/usr/src/dependencies/bundler
-
-RUN apk add --no-cache --update g++ git make
-
-RUN mkdir -p /usr/src/dependencies
-
-VOLUME /usr/src/dependencies
-
-COPY Gemfile Gemfile.lock ./
-
-RUN bundle install
-
-################################################################################
-# Production Build Stage
-################################################################################
-FROM base-stage AS production-build-stage
-
+# Configure application environment.
 ENV RACK_ENV=production \
     BUNDLE_DEPLOYMENT=1 \
     BUNDLE_WITHOUT=development:test
 
-RUN apk add --no-cache --update g++ make
+WORKDIR /usr/src/app
 
-COPY Gemfile Gemfile.lock ./
+# Install system dependencies.
+RUN apt update && \
+    apt install --no-install-recommends --yes \
+      g++ \
+      libjemalloc2 \
+      make \
+      && \
+    rm -rf /var/lib/apt/lists/*
+
+# Configure memory allocation.
+ENV LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libjemalloc.so.2"
+
+COPY .ruby-version Gemfile Gemfile.lock ./
 
 RUN bundle install \
     && bundle clean --force \
-    && rm -rf vendor/bundle/ruby/3.2.0/cache/*.gem \
-    && find vendor/bundle/ruby/3.2.0/gems/ \( -name "*.c" -o -name "*.o" \) -delete
+    && rm -rf vendor/bundle/ruby/3.3.0/cache/*.gem \
+    && find vendor/bundle/ruby/3.3.0/gems/ \( -name "*.c" -o -name "*.o" \) -delete
 
 COPY . .
 
 RUN bundle exec rake assets:precompile
-
-################################################################################
-# Production
-################################################################################
-FROM base-stage AS production
-
-ENV RACK_ENV=production \
-    BUNDLE_DEPLOYMENT=1 \
-    BUNDLE_WITHOUT=development:test
-
-COPY --from=production-build-stage /usr/src/app ./
 
 CMD ["bundle", "exec", "puma", "--config", "config/puma.rb"]
