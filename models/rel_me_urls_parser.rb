@@ -19,12 +19,12 @@ class RelMeUrlsParser
     Nokogiri::HTML(response.body.to_s, response.uri)
       .resolve_relative_urls!
       .css('[href][rel~="me"]')
-      .map { |node| node['href'] }
+      .map { |node| node["href"] }
   end
 
   def urls_from_headers
     LinkHeaderParser
-      .parse(response.headers.get('link'), base: response.uri)
+      .parse(response.headers.get("link"), base: response.uri)
       .group_by_relation_type
       .fetch(:me, [])
       .map(&:target_uri)

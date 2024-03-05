@@ -16,15 +16,15 @@
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'debug'
-require 'simplecov'
-require 'webmock/rspec'
+require "debug"
+require "simplecov"
+require "webmock/rspec"
 
-ENV['RACK_ENV'] = 'test'
+ENV["RACK_ENV"] = "test"
 
-require_relative '../config/environment'
+require_relative "../config/environment"
 
-Dir[File.join(__dir__, 'support/**/*.rb')].each { |f| require_relative f }
+Dir[File.join(__dir__, "support/**/*.rb")].each { |f| require_relative f }
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods
@@ -94,7 +94,7 @@ RSpec.configure do |config|
     # Use the documentation formatter for detailed output,
     # unless a formatter has already been configured
     # (e.g. via a command-line flag).
-    config.default_formatter = 'doc'
+    config.default_formatter = "doc"
   end
 
   # Print the 10 slowest examples and example groups at the
