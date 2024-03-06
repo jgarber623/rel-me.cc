@@ -39,7 +39,6 @@ class App < Roda
   end
 
   plugin :default_headers,
-         "Content-Type" => "text/html; charset=utf-8",
          "Referrer-Policy" => "no-referrer-when-downgrade",
          "X-Frame-Options" => "DENY",
          "X-XSS-Protection" => "0"
@@ -54,15 +53,22 @@ class App < Roda
          debug: false,
          precompile: ["application.css", "apple-touch-icon-180x180.png", "icon.png"]
 
-  configure do
-    use Rack::CommonLogger
-  end
+   configure do
+     use Rack::CommonLogger
+     use Rack::ContentType
+     use Rack::Deflater
+     use Rack::ETag
+   end
 
   # :nocov:
   configure :production do
-    use Rack::Deflater
     use Rack::HostRedirect, [ENV.fetch("HOSTNAME", nil), "www.rel-me.cc"].compact => "rel-me.cc"
-    use Rack::Static, urls: ["/assets"], root: "public"
+    use Rack::Static,
+        urls: ["/assets"],
+        root: "public",
+        header_rules: [
+          [:all, { "cache-control": "max-age=31536000, immutable" }]
+        ]
   end
   # :nocov:
 
