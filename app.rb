@@ -53,12 +53,12 @@ class App < Roda
          debug: false,
          precompile: ["application.css", "apple-touch-icon-180x180.png", "icon.png"]
 
-   configure do
-     use Rack::CommonLogger
-     use Rack::ContentType
-     use Rack::Deflater
-     use Rack::ETag
-   end
+  configure do
+    use Rack::CommonLogger
+    use Rack::ContentType
+    use Rack::Deflater
+    use Rack::ETag
+  end
 
   # :nocov:
   configure :production do
