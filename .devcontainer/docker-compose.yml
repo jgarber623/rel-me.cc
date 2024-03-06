@@ -1,0 +1,20 @@
+name: rel-me-cc
+
+services:
+  app:
+    image: jgarber623/rel-me-cc
+    build:
+      context: ..
+      dockerfile: ./.devcontainer/Dockerfile
+    init: true
+    entrypoint: sleep infinity
+    ports:
+      - "8080:8080"
+    volumes:
+      - ..:/workspace:cached
+      - bundle-cache:/usr/local/bundle
+      - node_modules-cache:/workspace/node_modules
+
+volumes:
+  bundle-cache:
+  node_modules-cache:

@@ -1,24 +1,19 @@
 inherit_from:
-  - https://raw.githubusercontent.com/jgarber623/rubocop-configs/main/.rubocop.roda.yml
+  - https://github.com/jgarber623/rubocop-configs/raw/main/.rubocop.yml
+  - https://github.com/jgarber623/rubocop-configs/raw/main/.rubocop-rspec.yml
 
-# Checks the indentation of the method name part in method calls that span more
-# than one line.
-Layout/MultilineMethodCallIndentation:
-  EnforcedStyle: indented_relative_to_receiver
-
-# Checks if the length of a block exceeds some maximum value.
-Metrics/BlockLength:
-  AllowedMethods:
-    - route
+AllCops:
+  Exclude:
+    - bin/bundle
 
 # Checks that spec file paths are consistent and well-formed.
 RSpec/FilePath:
   SpecSuffixOnly: true
 
+# Checks that spec file paths are consistent and well-formed.
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
 # Checks for nested example groups.
 RSpec/NestedGroups:
   Max: 4
-
-# Checks hash literal syntax.
-Style/HashSyntax:
-  EnforcedShorthandSyntax: either

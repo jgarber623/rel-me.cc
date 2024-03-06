@@ -1,54 +1,19 @@
 name: CI
 
 on:
-  pull_request:
-    branches: [main]
   workflow_call:
   workflow_dispatch:
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  analyze:
-    name: Analyze
-    permissions:
-      contents: read
-      security-events: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v2
-        with:
-          languages: ruby
-      - uses: github/codeql-action/analyze@v2
-  audit:
-    name: Audit
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: Run bundler-audit
-        run: bundle exec bundle-audit check --update
-  lint:
-    name: Lint
-    permissions:
-      contents: read
-      security-events: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: Run RuboCop
-        run: bundle exec rubocop
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: Run RSpec
-        run: bundle exec rspec
+  audit-ruby:
+    uses: "./.github/workflows/audit-ruby.yml"
+  lint-css:
+    uses: "./.github/workflows/lint-css.yml"
+  lint-ruby:
+    uses: "./.github/workflows/lint-ruby.yml"
+  test-ruby:
+    uses: "./.github/workflows/test-ruby.yml"
