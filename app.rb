@@ -55,7 +55,7 @@ class App < Roda
 
   # Third-party plugins
   plugin :sprockets,
-         css_compressor: :sassc,
+         css_compressor: :sass_embedded,
          debug: false,
          precompile: %w[application.css apple-touch-icon-180x180.png icon.png]
 
