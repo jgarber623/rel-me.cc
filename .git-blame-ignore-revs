@@ -5,6 +5,7 @@
 # by running the following command:
 #
 # $ git config blame.ignoreRevsFile .git-blame-ignore-revs
+
 9df74934aa2f7bf9a9f2d4f70ae2b64ab4a37a6d
 142845440767c626c4a65399cbc631139517a9a9
 1805df1e7bd4fe7648ca41e89fd6064d1c89c7cc
