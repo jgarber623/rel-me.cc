@@ -7,10 +7,6 @@ AllCops:
     - bin/bundle
 
 # Checks that spec file paths are consistent and well-formed.
-RSpec/FilePath:
-  SpecSuffixOnly: true
-
-# Checks that spec file paths are consistent and well-formed.
 RSpec/SpecFilePathFormat:
   Enabled: false
 
