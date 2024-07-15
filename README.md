@@ -50,4 +50,4 @@ rel-me.cc is written and maintained by [Jason Garber](https://sixtwothree.org).
 
 ## License
 
-rel-me.cc is freely available under the [MIT License](https://opensource.org/licenses/MIT). Use it, learn from it, fork it, improve it, change it, tailor it to your needs.
+rel-me.cc is freely available under the [MIT License](https://opensource.org/licenses/MIT).
