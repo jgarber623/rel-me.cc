@@ -86,7 +86,7 @@ GEM
     regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
-    rexml (3.3.8)
+    rexml (3.3.9)
     roda (3.84.0)
       rack
     roda-sprockets (2.0.0)
