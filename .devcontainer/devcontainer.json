@@ -53,7 +53,6 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "EditorConfig.EditorConfig",
         "Shopify.ruby-lsp"
       ],
       "settings": {
