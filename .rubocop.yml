@@ -1,10 +1,6 @@
 inherit_from:
-  - https://jgarber623.github.io/rubocop-configs/.rubocop.yml
-  - https://jgarber623.github.io/rubocop-configs/.rubocop-rspec.yml
-
-AllCops:
-  Exclude:
-    - bin/bundle
+  - https://rubocop.jgarber.cc/rubocop.yml
+  - https://rubocop.jgarber.cc/rubocop-rspec.yml
 
 # Checks that spec file paths are consistent and well-formed.
 RSpec/SpecFilePathFormat:
