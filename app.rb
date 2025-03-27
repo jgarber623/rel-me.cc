@@ -7,7 +7,7 @@ class App < Roda
 
   HTTP_HEADERS_OPTS = {
     accept: "*/*",
-    user_agent: "rel=“me” Link Discovery (https://rel-me.cc)"
+    user_agent: "rel=“me” Link Discovery (https://rel-me.cc)",
   }.freeze
 
   # Routing plugins
@@ -69,7 +69,7 @@ class App < Roda
         urls: ["/assets"],
         root: "public",
         header_rules: [
-          [:all, { "cache-control": "max-age=31536000, immutable" }]
+          [:all, { "cache-control": "max-age=31536000, immutable" }],
         ]
   end
   # :nocov:

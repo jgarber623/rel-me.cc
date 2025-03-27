@@ -57,8 +57,8 @@ RSpec.describe App, roda: :app do
             content_type: "text/html",
             link: [
               '<https://www.flickr.com/photos/jgarber>; rel="me"',
-              '<https://github.com/jgarber623>; rel="me authn"'
-            ]
+              '<https://github.com/jgarber623>; rel="me authn"',
+            ],
           },
           body: <<~HTML
             <html>
@@ -90,7 +90,7 @@ RSpec.describe App, roda: :app do
             "https://github.com/jgarber623",
             "https://www.flickr.com/photos/jgarber",
             "https://twitter.com/jgarber",
-            "https://indieweb.org/User:Sixtwothree.org"
+            "https://indieweb.org/User:Sixtwothree.org",
           ]
         end
 
