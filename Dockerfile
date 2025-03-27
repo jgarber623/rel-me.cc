@@ -1,56 +1,53 @@
 ################################################################################
 # Base Stage
 ################################################################################
-FROM ruby:3.3.6-slim-bookworm AS base-stage
+FROM ruby:3.4.2-slim-bookworm AS base
 
 EXPOSE 8080
+
+WORKDIR /app
 
 # Configure application environment.
 ENV RACK_ENV=production \
     BUNDLE_DEPLOYMENT=1 \
+    BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT=development:test
 
-WORKDIR /usr/src/app
-
 # Install system dependencies.
-RUN apt update && \
-    apt install --no-install-recommends --yes \
-      libjemalloc2 \
-      && \
-    rm -rf /var/lib/apt/lists/*
-
-# Configure memory allocation.
-ENV LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libjemalloc.so.2"
+RUN apt update -qq && \
+    apt install --no-install-recommends --yes libjemalloc2 libyaml-dev && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 ################################################################################
 # Build Stage
 ################################################################################
-FROM base-stage AS build-stage
+FROM base AS build
 
 # Install system dependencies.
-RUN apt update && \
-    apt install --no-install-recommends --yes \
-      g++ \
-      make \
-      && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt update -qq && \
+    apt install --no-install-recommends --yes g++ make && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 COPY .ruby-version Gemfile Gemfile.lock ./
 
 RUN bundle install \
-    && bundle clean --force \
-    && rm -rf vendor/bundle/ruby/3.3.0/cache/*.gem \
-    && find vendor/bundle/ruby/3.3.0/gems/ \( -name "*.c" -o -name "*.o" \) -delete
+    && rm -rf "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git \
+    && find "${BUNDLE_PATH}"/ruby/*/gems/ \( -name "*.c" -o -name "*.o" \) -delete
 
 COPY . .
 
 RUN bundle exec rake assets:precompile
 
 ################################################################################
-# Production
+# Production Stage
 ################################################################################
-FROM base-stage AS production
+FROM base AS production
 
-COPY --from=build-stage /usr/src/app ./
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build /app /app
 
-CMD ["bundle", "exec", "puma", "--config", "config/puma.rb"]
+RUN chmod +x docker-entrypoint.sh
+
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
+
+CMD ["bundle", "exec", "puma"]
