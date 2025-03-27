@@ -8,7 +8,10 @@ class RelMeUrlsParser
 
   # @return [Array<String>]
   def results
-    @results ||= urls_from_response.compact! || urls_from_response
+    urls_from_response.uniq!
+    urls_from_response.compact!
+
+    urls_from_response
   end
 
   private
@@ -18,7 +21,7 @@ class RelMeUrlsParser
   def urls_from_body
     Nokogiri::HTML(response.body.to_s, response.uri)
       .resolve_relative_urls!
-      .css('[href][rel~="me"]')
+      .css(%([href][rel~="me"]))
       .map { |node| node["href"] }
   end
 
@@ -31,6 +34,6 @@ class RelMeUrlsParser
   end
 
   def urls_from_response
-    @urls_from_response ||= (urls_from_headers + urls_from_body).uniq
+    @urls_from_response ||= (urls_from_headers + urls_from_body)
   end
 end
