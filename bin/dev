@@ -2,11 +2,4 @@
 
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-. "${SCRIPT_DIR}"/shared.lib.sh
-
-run_within_docker $@
-
-log "🏃 Running the application..."
-rerun --name rel-me.cc -- puma --config config/puma.rb
+rerun --name rel-me.cc -- puma
